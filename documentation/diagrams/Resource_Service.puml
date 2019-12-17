@@ -1,0 +1,273 @@
+@startuml
+hide circle
+hide methods
+hide stereotype
+show <<Enumeration>> stereotype
+skinparam class {
+   BackgroundColor<<Enumeration>> #E6F5F7
+   BackgroundColor<<Ref>> #FFFFE0
+   BackgroundColor<<Pivot>> #FFFFFFF
+   BackgroundColor #FCF2E3
+}
+
+class Service  <<Pivot>> {
+    category : String
+    description : String
+    endDate : DateTime
+    hasStarted : Boolean
+    href : String
+    id : String
+    isServiceEnabled : Boolean
+    isStateful : Boolean
+    name : String
+    serviceDate : String
+    serviceType : String
+    startDate : DateTime
+    startMode : String
+    state : ServiceStateType
+    @baseType : String
+    @schemaLocation : Uri
+    @type : String
+}
+
+class ServiceStateType <<Enumeration>> {
+    feasibilityChecked
+    designed
+    reserved
+    inactive
+    active
+    terminated
+}
+
+class Note  {
+    author : String
+    date : DateTime
+    id : String
+    text : String
+    @baseType : String
+    @schemaLocation : Uri
+    @type : String
+}
+
+class ResourceRef  <<Ref>> {
+    href : String
+    id : String
+    name : String
+    value : String
+    @baseType : String
+    @referredType : String
+    @schemaLocation : Uri
+    @type : String
+}
+
+class RelatedServiceOrderItem  {
+    itemAction : OrderItemActionType
+    itemId : String
+    role : String
+    serviceOrderHref : String
+    serviceOrderId : String
+    @baseType : String
+    @referredType : String
+    @schemaLocation : Uri
+    @type : String
+}
+
+class OrderItemActionType <<Enumeration>> {
+    add
+    modify
+    delete
+    noChange
+}
+
+class ServiceRelationship  <<Ref>> {
+    href : String
+    id : String
+    name : String
+    relationshipType : String
+    @baseType : String
+    @referredType : String
+    @schemaLocation : Uri
+    @type : String
+}
+
+class Characteristic  {
+    id : String
+    name : String
+    value : Any
+    valueType : String
+    @baseType : String
+    @schemaLocation : Uri
+    @type : String
+}
+
+class CharacteristicRelationship  {
+    id : String
+    relationshipType : String
+    @baseType : String
+    @schemaLocation : Uri
+    @type : String
+}
+
+class Feature  {
+    id : String
+    isBundle : Boolean
+    isEnabled : Boolean
+    name : String
+    @baseType : String
+    @schemaLocation : Uri
+    @type : String
+}
+
+class ConstraintRef  <<Ref>> {
+    href : String
+    id : String
+    name : String
+    version : String
+    @baseType : String
+    @referredType : String
+    @schemaLocation : Uri
+    @type : String
+}
+
+class FeatureRelationship  {
+    id : String
+    name : String
+    relationshipType : String
+    validFor : TimePeriod
+    @baseType : String
+    @schemaLocation : Uri
+    @type : String
+}
+
+class RelatedManagedEntityRefOrValue  {
+    href : String
+    id : String
+    name : String
+    role : String
+    @baseType : String
+    @referredType : String
+    @schemaLocation : Uri
+    @type : String
+}
+
+class RelatedPlaceRefOrValue  {
+    href : String
+    id : String
+    name : String
+    role : String
+    @baseType : String
+    @referredType : String
+    @schemaLocation : Uri
+    @type : String
+}
+
+class ServiceSpecificationRef  <<Ref>> {
+    href : String
+    id : String
+    name : String
+    version : String
+    @baseType : String
+    @referredType : String
+    @schemaLocation : Uri
+    @type : String
+}
+
+class TargetServiceSchema  {
+    @baseType : String
+    @schemaLocation : String
+    @type : String
+}
+
+class ServiceRefOrValue  {
+    category : String
+    description : String
+    endDate : DateTime
+    hasStarted : Boolean
+    href : String
+    id : String
+    isServiceEnabled : Boolean
+    isStateful : Boolean
+    name : String
+    serviceDate : String
+    serviceType : String
+    startDate : DateTime
+    startMode : String
+    state : ServiceStateType
+    @baseType : String
+    @referredType : String
+    @schemaLocation : Uri
+    @type : String
+}
+
+class RelatedParty  {
+    href : String
+    id : String
+    name : String
+    role : String
+    @baseType : String
+    @referredType : String
+    @schemaLocation : Uri
+    @type : String
+}
+
+Service -right[hidden]-> ServiceStateType
+
+Service *-->  "0..*" RelatedManagedEntityRefOrValue : relatedManagedEntity
+
+Service *-->  "0..*" Note : note
+
+Service *-->  "0..*" RelatedServiceOrderItem : serviceOrderItem
+
+Service *-->  "0..*" RelatedPlaceRefOrValue : place
+
+Service *-->  "0..*" RelatedParty : relatedParty
+
+Service *-->  "0..*" ResourceRef : supportingResource
+
+Service *-->  "0..1" ServiceSpecificationRef : serviceSpecification
+
+Service *-->  "0..*" Characteristic : serviceCharacteristic
+
+Service *-->  "0..*" ServiceRelationship : serviceRelationship
+
+Service *-->  "0..*" Feature : feature
+
+Service *-->  "0..*" ServiceRefOrValue : supportingService
+
+RelatedServiceOrderItem -right[hidden]-> OrderItemActionType
+
+ServiceRelationship *-->  "0..*" Characteristic : ServiceRelationshipCharacteristic
+
+Feature *-->  "1..*" Characteristic : featureCharacteristic
+
+ServiceRefOrValue *-right-> "0..*" ServiceRefOrValue : supportingService
+
+Note "0..*" <--* ServiceRefOrValue : note
+
+RelatedManagedEntityRefOrValue "0..*" <--* ServiceRefOrValue : relatedManagedEntity
+
+RelatedParty "0..*" <--* ServiceRefOrValue : relatedParty
+
+RelatedPlaceRefOrValue "0..*" <--* ServiceRefOrValue : place
+
+RelatedServiceOrderItem "0..*" <--* ServiceRefOrValue : serviceOrderItem
+
+ResourceRef "0..*" <--* ServiceRefOrValue : supportingResource
+
+ServiceSpecificationRef "0..1" <--* ServiceRefOrValue : serviceSpecification
+
+Characteristic "0..*" <-left-* ServiceRefOrValue : serviceCharacteristic
+
+ServiceRelationship "0..*" <--* ServiceRefOrValue : serviceRelationship
+
+Feature "0..*" <--* ServiceRefOrValue : feature
+
+ConstraintRef "0..*" <-left-* Feature : constraint
+
+Feature *-right-> "0..*" FeatureRelationship : featureRelationship
+
+Characteristic *-->  "0..*" CharacteristicRelationship : characteristicRelationship
+
+ServiceSpecificationRef *-->  "0..1" TargetServiceSchema : targetServiceSchema
+
+@enduml
