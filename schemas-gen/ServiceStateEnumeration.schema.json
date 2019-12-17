@@ -1,0 +1,17 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#", 
+    "$id": "ServiceStateEnumeration.schema.json", 
+    "title": "ServiceStateEnumeration", 
+    "definitions": {
+        "ServiceStateEnumeration": {
+            "type": "object", 
+            "description": "The life cycle state of the service", 
+            "properties": {}, 
+            "allOf": [
+                {
+                    "$ref": "CommonComponents.schema.json#/definitions/polymorphicPattern"
+                }
+            ]
+        }
+    }
+}

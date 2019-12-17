@@ -1,0 +1,9 @@
+{
+    "href": "https:/host:port/tmf-api/monitor/v1/monitor/8332", 
+    "id": "8332", 
+    "request": {}, 
+    "response": {}, 
+    "sourceHref": "a string ...", 
+    "state": "a string ...", 
+    "type": "a string ..."
+}

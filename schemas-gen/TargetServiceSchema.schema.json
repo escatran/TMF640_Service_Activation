@@ -1,0 +1,26 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#", 
+    "$id": "TargetServiceSchema.schema.json", 
+    "title": "TargetServiceSchema", 
+    "definitions": {
+        "TargetServiceSchema": {
+            "type": "object", 
+            "description": "The reference object to the schema and type of target service which is described by service specification", 
+            "properties": {
+                "@schemaLocation": {
+                    "type": "string", 
+                    "description": "This field provides a link to the schema describing the target service"
+                }, 
+                "@type": {
+                    "type": "string", 
+                    "description": "Class type of the target service"
+                }
+            }, 
+            "allOf": [
+                {
+                    "$ref": "CommonComponents.schema.json#/definitions/polymorphicPattern"
+                }
+            ]
+        }
+    }
+}

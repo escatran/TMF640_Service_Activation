@@ -1,0 +1,126 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#", 
+    "$id": "Service.schema.json", 
+    "title": "Service", 
+    "definitions": {
+        "Service": {
+            "type": "object", 
+            "description": "Service is an abstract base class for defining the Service hierarchy. All Services are characterized as either being possibly visible and usable by a Customer or not. This gives rise to the two subclasses of Service: CustomerFacingService and ResourceFacingService.", 
+            "properties": {
+                "category": {
+                    "type": "string", 
+                    "description": "Is it a customer facing or resource facing service"
+                }, 
+                "characteristic": {
+                    "type": "array", 
+                    "items": {
+                        "$ref": "Characteristic.schema.json#/definitions/Characteristic"
+                    }
+                }, 
+                "description": {
+                    "type": "string", 
+                    "description": "free-text description of the service"
+                }, 
+                "endDate": {
+                    "type": "string", 
+                    "format": "date-time", 
+                    "description": "Date when the service ends"
+                }, 
+                "hasStarted": {
+                    "type": "boolean", 
+                    "description": "This is a Boolean attribute that, if TRUE, signifies that this Service has already been started. If the value of this attribute is FALSE, then this signifies that this Service has NOT been Started."
+                }, 
+                "href": {
+                    "type": "string", 
+                    "description": "Reference of the service"
+                }, 
+                "id": {
+                    "type": "string", 
+                    "description": "Unique identifier of the service"
+                }, 
+                "isServiceEnabled": {
+                    "type": "boolean", 
+                    "description": "for use. If the value of this attribute is FALSE, then this means that this particular Service has NOT been enabled for use."
+                }, 
+                "isStateful": {
+                    "type": "boolean", 
+                    "description": "This is a Boolean attribute that, if TRUE, means that this Service can be changed without affecting any other services."
+                }, 
+                "name": {
+                    "type": "string", 
+                    "description": "Name of the service"
+                }, 
+                "note": {
+                    "type": "array", 
+                    "items": {
+                        "$ref": "Note.schema.json#/definitions/Note"
+                    }
+                }, 
+                "place": {
+                    "type": "array", 
+                    "items": {
+                        "$ref": "Place.schema.json#/definitions/Place"
+                    }
+                }, 
+                "relatedParty": {
+                    "type": "array", 
+                    "items": {
+                        "$ref": "RelatedParty.schema.json#/definitions/RelatedParty"
+                    }
+                }, 
+                "serviceDate": {
+                    "type": "string"
+                }, 
+                "serviceOrder": {
+                    "type": "array", 
+                    "items": {
+                        "$ref": "ServiceOrderRef.schema.json#/definitions/ServiceOrderRef"
+                    }
+                }, 
+                "serviceRelationship": {
+                    "type": "array", 
+                    "items": {
+                        "$ref": "ServiceRelationship.schema.json#/definitions/ServiceRelationship"
+                    }
+                }, 
+                "serviceSpecification": {
+                    "$ref": "ServiceSpecificationRef.schema.json#/definitions/ServiceSpecificationRef"
+                }, 
+                "serviceType": {
+                    "type": "string", 
+                    "description": "Business type of the service"
+                }, 
+                "startDate": {
+                    "type": "string", 
+                    "format": "date-time", 
+                    "description": "Date when the service starts"
+                }, 
+                "startMode": {
+                    "type": "string", 
+                    "description": "This attribute is an enumerated integer that indicates how the Service is started. Values include:\n 0: Unknown\n 1: Automatically by the managed environment\n 2: Automatically by the owning device\n 3: Manually by the Provider of the Service\n 4: Manually by a Customer of the Provider\n 5: Any of the above"
+                }, 
+                "state": {
+                    "$ref": "ServiceStateEnumeration.schema.json#/definitions/ServiceStateEnumeration", 
+                    "description": "The life cycle state of the service:\n\n feasibilityChecked\n designed\n reserved\n active\n inactive\n terminated  \n"
+                }, 
+                "supportingResource": {
+                    "type": "array", 
+                    "items": {
+                        "$ref": "ResourceRef.schema.json#/definitions/ResourceRef"
+                    }
+                }, 
+                "supportingService": {
+                    "type": "array", 
+                    "items": {
+                        "$ref": "ServiceRef.schema.json#/definitions/ServiceRef"
+                    }
+                }
+            }, 
+            "allOf": [
+                {
+                    "$ref": "CommonComponents.schema.json#/definitions/polymorphicPattern"
+                }
+            ]
+        }
+    }
+}

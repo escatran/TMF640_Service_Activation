@@ -1,0 +1,68 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#", 
+    "$id": "Resource.schema.json", 
+    "title": "Resource", 
+    "definitions": {
+        "Resource": {
+            "type": "object", 
+            "properties": {
+                "adminState": {
+                    "type": "string"
+                }, 
+                "characteristic": {
+                    "type": "array", 
+                    "items": {
+                        "$ref": "Characteristic.schema.json#/definitions/Characteristic"
+                    }
+                }, 
+                "description": {
+                    "type": "string"
+                }, 
+                "href": {
+                    "type": "string"
+                }, 
+                "id": {
+                    "type": "integer"
+                }, 
+                "name": {
+                    "type": "string"
+                }, 
+                "operationalState": {
+                    "type": "string"
+                }, 
+                "relatedParty": {
+                    "type": "array", 
+                    "items": {
+                        "$ref": "RelatedParty.schema.json#/definitions/RelatedParty"
+                    }
+                }, 
+                "resourceRelationship": {
+                    "type": "array", 
+                    "items": {
+                        "$ref": "ResourceRelationship.schema.json#/definitions/ResourceRelationship"
+                    }
+                }, 
+                "resourceSpecification": {
+                    "$ref": "ResourceSpecification.schema.json#/definitions/ResourceSpecification"
+                }, 
+                "state": {
+                    "type": "string"
+                }, 
+                "type": {
+                    "type": "string"
+                }, 
+                "usageState": {
+                    "type": "string"
+                }, 
+                "version": {
+                    "type": "string"
+                }
+            }, 
+            "allOf": [
+                {
+                    "$ref": "CommonComponents.schema.json#/definitions/polymorphicPattern"
+                }
+            ]
+        }
+    }
+}

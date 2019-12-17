@@ -1,0 +1,915 @@
+{
+    "swagger": "2.0", 
+    "info": {
+        "title": "API Activation and Configuration", 
+        "description": "", 
+        "version": "1.0"
+    }, 
+    "host": "env-0693795.jelastic.servint.net", 
+    "basePath": "/DSEntityProvisioning/api/ActivationAndConfiguration/v2", 
+    "schemes": [
+        "http"
+    ], 
+    "consumes": [
+        "application/json"
+    ], 
+    "produces": [
+        "application/json"
+    ], 
+    "paths": {
+        "/hub": {
+            "get": {
+                "operationId": "hubFind", 
+                "summary": "hubFind", 
+                "description": "", 
+                "tags": [
+                    "hub"
+                ], 
+                "responses": {
+                    "200": {
+                        "description": "List of Hub", 
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Hub"
+                            }, 
+                            "type": "array"
+                        }
+                    }
+                }, 
+                "deprecated": false
+            }, 
+            "post": {
+                "operationId": "hubCreate", 
+                "summary": "hubCreate", 
+                "description": "", 
+                "tags": [
+                    "hub"
+                ], 
+                "parameters": [
+                    {
+                        "in": "body", 
+                        "name": "hub", 
+                        "required": true, 
+                        "schema": {
+                            "$ref": "#/definitions/Hub"
+                        }
+                    }
+                ], 
+                "responses": {
+                    "201": {
+                        "description": "Hub", 
+                        "schema": {
+                            "$ref": "#/definitions/Hub"
+                        }
+                    }
+                }, 
+                "deprecated": false
+            }
+        }, 
+        "/hub/{hubId}": {
+            "get": {
+                "operationId": "hubGet", 
+                "summary": "hubGet", 
+                "description": "", 
+                "tags": [
+                    "hub"
+                ], 
+                "parameters": [
+                    {
+                        "in": "path", 
+                        "name": "hubId", 
+                        "required": true, 
+                        "type": "string"
+                    }
+                ], 
+                "responses": {
+                    "200": {
+                        "description": "Hub", 
+                        "schema": {
+                            "$ref": "#/definitions/Hub"
+                        }
+                    }
+                }, 
+                "deprecated": false
+            }, 
+            "delete": {
+                "operationId": "hubDelete", 
+                "summary": "hubDelete", 
+                "description": "", 
+                "tags": [
+                    "hub"
+                ], 
+                "parameters": [
+                    {
+                        "in": "path", 
+                        "name": "hubId", 
+                        "required": true, 
+                        "type": "string"
+                    }
+                ], 
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    }
+                }, 
+                "deprecated": false
+            }
+        }, 
+        "/monitor": {
+            "get": {
+                "operationId": "monitorFind", 
+                "summary": "monitorFind", 
+                "description": "", 
+                "tags": [
+                    "monitor"
+                ], 
+                "parameters": [
+                    {
+                        "description": "", 
+                        "in": "query", 
+                        "name": "fields", 
+                        "required": false, 
+                        "type": "string"
+                    }
+                ], 
+                "responses": {
+                    "200": {
+                        "description": "List of monitor", 
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Monitor"
+                            }, 
+                            "type": "array"
+                        }
+                    }
+                }, 
+                "deprecated": false
+            }
+        }, 
+        "/monitor/{monitorId}": {
+            "get": {
+                "operationId": "monitorGet", 
+                "summary": "monitorGet", 
+                "description": "", 
+                "tags": [
+                    "monitor"
+                ], 
+                "parameters": [
+                    {
+                        "in": "path", 
+                        "name": "monitorId", 
+                        "required": true, 
+                        "type": "string"
+                    }, 
+                    {
+                        "description": "", 
+                        "in": "query", 
+                        "name": "fields", 
+                        "required": false, 
+                        "type": "string"
+                    }
+                ], 
+                "responses": {
+                    "200": {
+                        "description": "monitor", 
+                        "schema": {
+                            "$ref": "#/definitions/Monitor"
+                        }
+                    }
+                }, 
+                "deprecated": false
+            }, 
+            "head": {
+                "operationId": "monitorHead", 
+                "summary": "monitorHead", 
+                "description": "", 
+                "tags": [
+                    "monitor"
+                ], 
+                "parameters": [
+                    {
+                        "in": "path", 
+                        "name": "monitorId", 
+                        "required": true, 
+                        "type": "string"
+                    }, 
+                    {
+                        "description": "", 
+                        "in": "query", 
+                        "name": "fields", 
+                        "required": false, 
+                        "type": "string"
+                    }
+                ], 
+                "responses": {
+                    "200": {
+                        "description": "monitor", 
+                        "schema": {
+                            "$ref": "#/definitions/Monitor"
+                        }
+                    }
+                }, 
+                "deprecated": false
+            }
+        }, 
+        "/resource": {
+            "get": {
+                "operationId": "resourceFind", 
+                "summary": "resourceFind", 
+                "description": "", 
+                "tags": [
+                    "resource"
+                ], 
+                "parameters": [
+                    {
+                        "description": "", 
+                        "in": "query", 
+                        "name": "fields", 
+                        "required": false, 
+                        "type": "string"
+                    }
+                ], 
+                "responses": {
+                    "200": {
+                        "description": "List of resource ", 
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Resource"
+                            }, 
+                            "type": "array"
+                        }
+                    }
+                }, 
+                "deprecated": false
+            }, 
+            "post": {
+                "operationId": "resourceCreate", 
+                "summary": "resourceCreate", 
+                "description": "", 
+                "tags": [
+                    "resource"
+                ], 
+                "parameters": [
+                    {
+                        "in": "body", 
+                        "name": "resource", 
+                        "required": true, 
+                        "schema": {
+                            "$ref": "#/definitions/Resource"
+                        }
+                    }
+                ], 
+                "responses": {
+                    "201": {
+                        "description": "PNF", 
+                        "schema": {
+                            "$ref": "#/definitions/Resource"
+                        }
+                    }
+                }, 
+                "deprecated": false
+            }
+        }, 
+        "/resource/{resourceId}": {
+            "get": {
+                "operationId": "resourceGet", 
+                "summary": "resourceGet", 
+                "description": "", 
+                "tags": [
+                    "resource"
+                ], 
+                "parameters": [
+                    {
+                        "in": "path", 
+                        "name": "resourceId", 
+                        "required": true, 
+                        "type": "string"
+                    }, 
+                    {
+                        "description": "", 
+                        "in": "query", 
+                        "name": "fields", 
+                        "required": false, 
+                        "type": "string"
+                    }
+                ], 
+                "responses": {
+                    "200": {
+                        "description": "resource", 
+                        "schema": {
+                            "$ref": "#/definitions/Resource"
+                        }
+                    }
+                }, 
+                "deprecated": false
+            }, 
+            "patch": {
+                "operationId": "resourcePatch", 
+                "summary": "resourcePatch", 
+                "description": "", 
+                "tags": [
+                    "resource"
+                ], 
+                "parameters": [
+                    {
+                        "in": "path", 
+                        "name": "resourceId", 
+                        "required": true, 
+                        "type": "string"
+                    }, 
+                    {
+                        "in": "body", 
+                        "name": "resource", 
+                        "required": true, 
+                        "schema": {
+                            "$ref": "#/definitions/Resource"
+                        }
+                    }
+                ], 
+                "responses": {
+                    "200": {
+                        "description": "Success resource", 
+                        "schema": {
+                            "$ref": "#/definitions/Resource"
+                        }
+                    }
+                }, 
+                "deprecated": false
+            }, 
+            "delete": {
+                "operationId": "resourceDelete", 
+                "summary": "resourceDelete", 
+                "description": "", 
+                "tags": [
+                    "resource"
+                ], 
+                "parameters": [
+                    {
+                        "in": "path", 
+                        "name": "resourceId", 
+                        "required": true, 
+                        "type": "string"
+                    }
+                ], 
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    }
+                }, 
+                "deprecated": false
+            }
+        }, 
+        "/service": {
+            "get": {
+                "operationId": "serviceFind", 
+                "summary": "serviceFind", 
+                "description": "", 
+                "tags": [
+                    "service"
+                ], 
+                "parameters": [
+                    {
+                        "description": "", 
+                        "in": "query", 
+                        "name": "fields", 
+                        "required": false, 
+                        "type": "string"
+                    }
+                ], 
+                "responses": {
+                    "200": {
+                        "description": "List of Service", 
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Service"
+                            }, 
+                            "type": "array"
+                        }
+                    }
+                }, 
+                "deprecated": false
+            }, 
+            "post": {
+                "operationId": "serviceCreate", 
+                "summary": "serviceCreate", 
+                "description": "", 
+                "tags": [
+                    "service"
+                ], 
+                "parameters": [
+                    {
+                        "in": "body", 
+                        "name": "service", 
+                        "required": true, 
+                        "schema": {
+                            "$ref": "#/definitions/Service"
+                        }
+                    }
+                ], 
+                "responses": {
+                    "201": {
+                        "description": "service", 
+                        "schema": {
+                            "$ref": "#/definitions/Service"
+                        }
+                    }
+                }, 
+                "deprecated": false
+            }
+        }, 
+        "/service/{ServiceId}": {
+            "get": {
+                "operationId": "serviceServiceGet", 
+                "summary": "serviceServiceGet", 
+                "description": "", 
+                "tags": [
+                    "service"
+                ], 
+                "parameters": [
+                    {
+                        "in": "path", 
+                        "name": "ServiceId", 
+                        "required": true, 
+                        "type": "string"
+                    }, 
+                    {
+                        "description": "", 
+                        "in": "query", 
+                        "name": "fields", 
+                        "required": false, 
+                        "type": "string"
+                    }
+                ], 
+                "responses": {
+                    "200": {
+                        "description": "Service", 
+                        "schema": {
+                            "$ref": "#/definitions/Service"
+                        }
+                    }
+                }, 
+                "deprecated": false
+            }, 
+            "patch": {
+                "operationId": "ServicePatch", 
+                "summary": "ServicePatch", 
+                "description": "", 
+                "tags": [
+                    "service"
+                ], 
+                "parameters": [
+                    {
+                        "in": "path", 
+                        "name": "ServiceId", 
+                        "required": true, 
+                        "type": "string"
+                    }, 
+                    {
+                        "in": "body", 
+                        "name": "Service", 
+                        "required": true, 
+                        "schema": {
+                            "$ref": "#/definitions/Service"
+                        }
+                    }
+                ], 
+                "responses": {
+                    "200": {
+                        "description": "Success Service", 
+                        "schema": {
+                            "$ref": "#/definitions/Service"
+                        }
+                    }
+                }, 
+                "deprecated": false
+            }, 
+            "delete": {
+                "operationId": "serviceDelete", 
+                "summary": "serviceDelete", 
+                "description": "", 
+                "tags": [
+                    "service"
+                ], 
+                "parameters": [
+                    {
+                        "in": "path", 
+                        "name": "ServiceId", 
+                        "required": true, 
+                        "type": "string"
+                    }
+                ], 
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    }
+                }, 
+                "deprecated": false
+            }
+        }
+    }, 
+    "definitions": {
+        "HeaderItem": {
+            "additionalProperties": false, 
+            "properties": {
+                "name": {
+                    "type": "string"
+                }, 
+                "value": {
+                    "type": "string"
+                }
+            }, 
+            "required": [
+                "name", 
+                "value"
+            ], 
+            "type": "object"
+        }, 
+        "Hub": {
+            "properties": {
+                "callback": {
+                    "type": "string"
+                }, 
+                "id": {
+                    "type": "string"
+                }, 
+                "query": {
+                    "type": "string"
+                }
+            }, 
+            "type": "object"
+        }, 
+        "Monitor": {
+            "additionalProperties": false, 
+            "description": "JSON Schema generated by XMLSpy v2016 rel. 2 (http://www.altova.com)", 
+            "properties": {
+                "href": {
+                    "type": "string"
+                }, 
+                "id": {
+                    "type": "string"
+                }, 
+                "request": {
+                    "$ref": "#/definitions/Request"
+                }, 
+                "response": {
+                    "$ref": "#/definitions/Response"
+                }, 
+                "sourceHref": {
+                    "type": "string"
+                }, 
+                "state": {
+                    "type": "string"
+                }, 
+                "type": {
+                    "type": "string"
+                }
+            }, 
+            "required": [
+                "id", 
+                "state", 
+                "request", 
+                "response", 
+                "href", 
+                "sourceHref"
+            ], 
+            "type": "object"
+        }, 
+        "NetworkFuction": {
+            "properties": {
+                "href": {
+                    "type": "string"
+                }, 
+                "id": {
+                    "type": "string"
+                }
+            }, 
+            "type": "object"
+        }, 
+        "RelatedPartyRef": {
+            "properties": {
+                "href": {
+                    "type": "string"
+                }, 
+                "id": {
+                    "type": "string"
+                }, 
+                "role": {
+                    "type": "string"
+                }
+            }, 
+            "type": "object"
+        }, 
+        "Request": {
+            "additionalProperties": false, 
+            "properties": {
+                "body": {
+                    "type": "string"
+                }, 
+                "header": {
+                    "items": {
+                        "$ref": "#/definitions/HeaderItem"
+                    }, 
+                    "title": "header", 
+                    "type": "array"
+                }, 
+                "method": {
+                    "type": "string"
+                }, 
+                "to": {
+                    "type": "string"
+                }
+            }, 
+            "required": [
+                "body", 
+                "header"
+            ], 
+            "type": "object"
+        }, 
+        "Resource": {
+            "properties": {
+                "adminState": {
+                    "enum": [
+                        "unknown", 
+                        "locked", 
+                        "shuttingDown", 
+                        "unlocked"
+                    ], 
+                    "type": "string"
+                }, 
+                "description": {
+                    "type": "string"
+                }, 
+                "href": {
+                    "type": "string"
+                }, 
+                "id": {
+                    "format": "int64", 
+                    "type": "integer"
+                }, 
+                "name": {
+                    "type": "string"
+                }, 
+                "operationalState": {
+                    "enum": [
+                        "unknown", 
+                        "disabled", 
+                        "enabled", 
+                        "testing"
+                    ], 
+                    "type": "string"
+                }, 
+                "relatedParty": {
+                    "items": {
+                        "$ref": "#/definitions/RelatedPartyRef"
+                    }, 
+                    "type": "array"
+                }, 
+                "resourceCharacteristic": {
+                    "items": {
+                        "$ref": "#/definitions/ResourceCharacteristic"
+                    }, 
+                    "type": "array"
+                }, 
+                "resourceRelationship": {
+                    "items": {
+                        "$ref": "#/definitions/ResourceRelationship"
+                    }, 
+                    "type": "array"
+                }, 
+                "resourceSpecification": {
+                    "$ref": "#/definitions/ResourceSpecification", 
+                    "type": "object"
+                }, 
+                "state": {
+                    "enum": [
+                        "inactive", 
+                        "active", 
+                        "terminated"
+                    ], 
+                    "type": "string"
+                }, 
+                "type": {
+                    "type": "string"
+                }, 
+                "usageState": {
+                    "enum": [
+                        "unknown", 
+                        "idle", 
+                        "active", 
+                        "busy"
+                    ], 
+                    "type": "string"
+                }, 
+                "version": {
+                    "type": "string"
+                }
+            }, 
+            "type": "object"
+        }, 
+        "ResourceCharacteristic": {
+            "properties": {
+                "name": {
+                    "type": "string"
+                }, 
+                "value": {
+                    "type": "string"
+                }
+            }, 
+            "type": "object"
+        }, 
+        "ResourceRef": {
+            "properties": {
+                "href": {
+                    "type": "string"
+                }, 
+                "id": {
+                    "type": "string"
+                }
+            }, 
+            "type": "object"
+        }, 
+        "ResourceRelationship": {
+            "properties": {
+                "resource": {
+                    "$ref": "#/definitions/ResourceRef"
+                }, 
+                "type": {
+                    "type": "string"
+                }
+            }, 
+            "required": [
+                "resource"
+            ], 
+            "type": "object"
+        }, 
+        "ResourceSpecification": {
+            "properties": {
+                "href": {
+                    "type": "string"
+                }, 
+                "id": {
+                    "type": "string"
+                }
+            }, 
+            "type": "object"
+        }, 
+        "Response": {
+            "additionalProperties": false, 
+            "properties": {
+                "body": {
+                    "type": "string"
+                }, 
+                "header": {
+                    "items": {
+                        "$ref": "#/definitions/HeaderItem"
+                    }, 
+                    "title": "header", 
+                    "type": "array"
+                }, 
+                "statusCode": {
+                    "type": "string"
+                }
+            }, 
+            "required": [
+                "body", 
+                "header"
+            ], 
+            "type": "object"
+        }, 
+        "Service": {
+            "properties": {
+                "description": {
+                    "type": "string"
+                }, 
+                "href": {
+                    "type": "string"
+                }, 
+                "id": {
+                    "format": "int64", 
+                    "type": "integer"
+                }, 
+                "name": {
+                    "type": "string"
+                }, 
+                "relatedParty": {
+                    "items": {
+                        "$ref": "#/definitions/RelatedPartyRef"
+                    }, 
+                    "type": "array"
+                }, 
+                "serviceCharacteristic": {
+                    "items": {
+                        "$ref": "#/definitions/ServiceCharacteristic"
+                    }, 
+                    "type": "array"
+                }, 
+                "serviceRelationship": {
+                    "items": {
+                        "$ref": "#/definitions/ServiceRelationship"
+                    }, 
+                    "type": "array"
+                }, 
+                "serviceSpecification": {
+                    "$ref": "#/definitions/ServiceSpecification", 
+                    "type": "object"
+                }, 
+                "state": {
+                    "enum": [
+                        "Inactive", 
+                        "Active", 
+                        "Terminated"
+                    ], 
+                    "type": "string"
+                }, 
+                "supportingResource": {
+                    "items": {
+                        "$ref": "#/definitions/SupportingResource"
+                    }, 
+                    "type": "array"
+                }, 
+                "supportingService": {
+                    "items": {
+                        "$ref": "#/definitions/SupportingService"
+                    }, 
+                    "type": "array"
+                }, 
+                "type": {
+                    "type": "string"
+                }, 
+                "version": {
+                    "type": "string"
+                }
+            }, 
+            "type": "object"
+        }, 
+        "ServiceCharacteristic": {
+            "properties": {
+                "name": {
+                    "type": "string"
+                }, 
+                "value": {
+                    "type": "string"
+                }
+            }, 
+            "type": "object"
+        }, 
+        "ServiceRef": {
+            "properties": {
+                "href": {
+                    "type": "string"
+                }, 
+                "id": {
+                    "type": "string"
+                }
+            }, 
+            "type": "object"
+        }, 
+        "ServiceRelationship": {
+            "properties": {
+                "service": {
+                    "$ref": "#/definitions/ServiceRef"
+                }, 
+                "type": {
+                    "type": "string"
+                }
+            }, 
+            "required": [
+                "service"
+            ], 
+            "type": "object"
+        }, 
+        "ServiceSpecification": {
+            "properties": {
+                "href": {
+                    "type": "string"
+                }, 
+                "id": {
+                    "type": "string"
+                }
+            }, 
+            "type": "object"
+        }, 
+        "SupportingResource": {
+            "properties": {
+                "href": {
+                    "type": "string"
+                }, 
+                "id": {
+                    "type": "string"
+                }
+            }, 
+            "type": "object"
+        }, 
+        "SupportingService": {
+            "properties": {
+                "href": {
+                    "type": "string"
+                }, 
+                "id": {
+                    "type": "string"
+                }
+            }, 
+            "type": "object"
+        }
+    }
+}

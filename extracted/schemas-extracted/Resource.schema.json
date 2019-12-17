@@ -1,0 +1,88 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#", 
+    "$id": "Resource.schema.json", 
+    "title": "Resource", 
+    "definitions": {
+        "Resource": {
+            "type": "object", 
+            "properties": {
+                "adminState": {
+                    "type": "string", 
+                    "enum": [
+                        "unknown", 
+                        "locked", 
+                        "shuttingDown", 
+                        "unlocked"
+                    ]
+                }, 
+                "description": {
+                    "type": "string"
+                }, 
+                "href": {
+                    "type": "string"
+                }, 
+                "id": {
+                    "type": "integer", 
+                    "format": "int64"
+                }, 
+                "name": {
+                    "type": "string"
+                }, 
+                "operationalState": {
+                    "type": "string", 
+                    "enum": [
+                        "unknown", 
+                        "disabled", 
+                        "enabled", 
+                        "testing"
+                    ]
+                }, 
+                "relatedParty": {
+                    "type": "array", 
+                    "items": {
+                        "$ref": "RelatedPartyRef.schema.json#/definitions/RelatedPartyRef"
+                    }
+                }, 
+                "resourceCharacteristic": {
+                    "type": "array", 
+                    "items": {
+                        "$ref": "ResourceCharacteristic.schema.json#/definitions/ResourceCharacteristic"
+                    }
+                }, 
+                "resourceRelationship": {
+                    "type": "array", 
+                    "items": {
+                        "$ref": "ResourceRelationship.schema.json#/definitions/ResourceRelationship"
+                    }
+                }, 
+                "resourceSpecification": {
+                    "type": "object", 
+                    "$ref": "ResourceSpecification.schema.json#/definitions/ResourceSpecification"
+                }, 
+                "state": {
+                    "type": "string", 
+                    "enum": [
+                        "inactive", 
+                        "active", 
+                        "terminated"
+                    ]
+                }, 
+                "type": {
+                    "type": "string"
+                }, 
+                "usageState": {
+                    "type": "string", 
+                    "enum": [
+                        "unknown", 
+                        "idle", 
+                        "active", 
+                        "busy"
+                    ]
+                }, 
+                "version": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

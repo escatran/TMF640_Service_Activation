@@ -1,0 +1,17 @@
+{
+    "serviceType": "Cloud",
+    "serviceDate": "2018-01-15T12:26:11.747Z",
+    "startDate": "2018-01-15T12:26:11.747Z",
+    "serviceCharacteristic": [
+        {
+            "name": "vCPE_IP",
+            "valueType": "object",
+            "value":
+            {
+                "@type": "IPAddress",
+                "@schemaLocation": "https://mycsp.com:8080/tmf-api/schema/Service/IPAddress.schema.json",
+                "address": "193.218.236.21"
+            }
+        }
+    ]
+}

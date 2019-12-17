@@ -1,0 +1,41 @@
+{
+    "category": "a string ...", 
+    "characteristic": [
+        {}
+    ], 
+    "description": "This  service ...", 
+    "endDate": "2018-12-06T00:00", 
+    "hasStarted": true, 
+    "href": "https:/host:port/tmf-api/service/v1/service/2706", 
+    "id": "2706", 
+    "isServiceEnabled": true, 
+    "isStateful": false, 
+    "name": "a string ...", 
+    "note": [
+        {}
+    ], 
+    "place": [
+        {}
+    ], 
+    "relatedParty": [
+        {}
+    ], 
+    "serviceDate": "a string ...", 
+    "serviceOrder": [
+        {}
+    ], 
+    "serviceRelationship": [
+        {}
+    ], 
+    "serviceSpecification": {}, 
+    "serviceType": "a string ...", 
+    "startDate": "2018-12-06T00:00", 
+    "startMode": "a string ...", 
+    "state": {}, 
+    "supportingResource": [
+        {}
+    ], 
+    "supportingService": [
+        {}
+    ]
+}

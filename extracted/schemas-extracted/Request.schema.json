@@ -1,0 +1,33 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#", 
+    "$id": "Request.schema.json", 
+    "title": "Request", 
+    "definitions": {
+        "Request": {
+            "type": "object", 
+            "properties": {
+                "body": {
+                    "type": "string"
+                }, 
+                "header": {
+                    "type": "array", 
+                    "items": {
+                        "$ref": "HeaderItem.schema.json#/definitions/HeaderItem"
+                    }, 
+                    "title": "header"
+                }, 
+                "method": {
+                    "type": "string"
+                }, 
+                "to": {
+                    "type": "string"
+                }
+            }, 
+            "additionalProperties": false, 
+            "required": [
+                "body", 
+                "header"
+            ]
+        }
+    }
+}

@@ -1,0 +1,73 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#", 
+    "$id": "Service.schema.json", 
+    "title": "Service", 
+    "definitions": {
+        "Service": {
+            "type": "object", 
+            "properties": {
+                "description": {
+                    "type": "string"
+                }, 
+                "href": {
+                    "type": "string"
+                }, 
+                "id": {
+                    "type": "integer", 
+                    "format": "int64"
+                }, 
+                "name": {
+                    "type": "string"
+                }, 
+                "relatedParty": {
+                    "type": "array", 
+                    "items": {
+                        "$ref": "RelatedPartyRef.schema.json#/definitions/RelatedPartyRef"
+                    }
+                }, 
+                "serviceCharacteristic": {
+                    "type": "array", 
+                    "items": {
+                        "$ref": "ServiceCharacteristic.schema.json#/definitions/ServiceCharacteristic"
+                    }
+                }, 
+                "serviceRelationship": {
+                    "type": "array", 
+                    "items": {
+                        "$ref": "ServiceRelationship.schema.json#/definitions/ServiceRelationship"
+                    }
+                }, 
+                "serviceSpecification": {
+                    "type": "object", 
+                    "$ref": "ServiceSpecification.schema.json#/definitions/ServiceSpecification"
+                }, 
+                "state": {
+                    "type": "string", 
+                    "enum": [
+                        "Inactive", 
+                        "Active", 
+                        "Terminated"
+                    ]
+                }, 
+                "supportingResource": {
+                    "type": "array", 
+                    "items": {
+                        "$ref": "SupportingResource.schema.json#/definitions/SupportingResource"
+                    }
+                }, 
+                "supportingService": {
+                    "type": "array", 
+                    "items": {
+                        "$ref": "SupportingService.schema.json#/definitions/SupportingService"
+                    }
+                }, 
+                "type": {
+                    "type": "string"
+                }, 
+                "version": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

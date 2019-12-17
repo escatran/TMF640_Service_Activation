@@ -1,0 +1,28 @@
+{
+    "id": "44555",
+    "href": "https://mycsp.com:8080/tmf-api/ServiceActivationAndConfiguration/v4/monitor/44555",
+    "state": "In Progress",
+    "request": {
+        "method": "http",
+        "to": "https://mycsp.com:5050/netAPIs/activate",
+        "body": "ACTIVATE BBAND 144445",
+        "header": [
+            {
+                "name": "locale",
+                "value": "en-us"
+            }
+        ]
+    },
+    "response": {
+        "statusCode": "344",
+        "body": "ACTIVATE BBAND 144445 REQUEST RECEIVED PENDING",
+        "header": [
+            {
+                "name": "locale",
+                "value": "en-us"
+            }
+        ]
+    },
+    "sourceHref": "https://mycsp.com:8080/tmf-api/ServiceActivationAndConfiguration/v4/service/5351",
+    "@type": "Monitor"
+}

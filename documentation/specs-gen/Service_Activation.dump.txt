@@ -1,0 +1,405 @@
+
+======= Service_Activation 
+
+title: TMF640 Service Activation and Configuration API REST Specification R18.5.0
+  18: style:Heading 1 text:NOTICE
+  35: style:Heading 1 text:Table of Contents
+  56: style:Heading 1 text: LIST OF TABLES
+  60: style:Heading 1 text:INTRODUCTION
+    67: style:Heading 2 text:Lifecycle of Service
+  70: style:Heading 1 text:Support of polymorphism and extension patterns
+  78: style:Heading 1 text:RESOURCE MODEL
+    79: style:Heading 2 text:Managed Entity and Task Resource Models
+      80: style:Heading 3 text:FIRST resource
+    82: style:Heading 2 text:Notification Resource Models
+      84: style:Heading 3 text:First Notification
+  87: style:Heading 1 text: API OPERATIONS
+    94: style:Heading 2 text:VERB  url
+  96: style:Heading 1 text:API NOTIFICATIONS
+    99: style:Heading 2 text:Register listener
+    113: style:Heading 2 text:Unregister listener
+    124: style:Heading 2 text:Publish Event to listener
+  140: style:Heading 1 text:Acknowledgements
+    142: style:Heading 2 text:Version History
+    146: style:Heading 2 text:Release History
+    149: style:Heading 2 text:Contributors to Document
+
+
+------- CONTENT ------ 
+
+3: style:Normal text:TM Forum Specification
+6: style:Normal text:Service Activation and Configuration API REST Specification
+12: style:Normal text:TMF640
+13: style:Normal text:Release 18.5.0
+14: style:Normal text:January 2019
+17: TABLE 
+  18: style:Heading 1 text:NOTICE
+  19: style:Normal text:Copyright © TM Forum 2019. All Rights Reserved.
+  21: style:Normal text:This document and translations of it may be copied and furnished to others, and derivative works that comment on or otherwise explain it or assist in its implementation may be prepared, copied, published, and distributed, in whole or in part, without restriction of any kind, provided that the above copyright notice and this section are included on all such copies and derivative works. However, this document itself may not be modified in any way, including by removing the copyright notice or references to TM FORUM, except as needed for the purpose of developing any document or deliverable produced by a TM FORUM Collaboration Project Team (in which case the rules applicable to copyrights, as set forth in the , must be followed) or as required to translate it into languages other than English.
+  23: style:Normal text:The limited permissions granted above are perpetual and will not be revoked by TM FORUM or its successors or assigns.
+  25: style:Normal text:This document and the information contained herein is provided on an "AS IS" basis and TM FORUM DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTY THAT THE USE OF THE INFORMATION HEREIN WILL NOT INFRINGE ANY OWNERSHIP RIGHTS OR ANY IMPLIED WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
+  27: style:Normal text:Direct inquiries to the TM Forum office:
+  29: style:Normal text:4 Century Drive, Suite 100
+  30: style:Normal text:Parsippany, NJ 07054, USA
+  31: style:Normal text:Tel No. +1 973 944 5100
+  32: style:Normal text:Fax No. +1 973 998 7916
+  33: style:Normal text:TM Forum Web Page: 
+  35: style:Heading 1 text:Table of Contents
+  56: style:Heading 1 text: LIST OF TABLES
+  58: style:Normal text:N/A
+  60: style:Heading 1 text:INTRODUCTION
+  61: style:Normal text:Services may be activated or configured by the Activation and Configuration API. 
+  62: style:Normal text:The following examples use the characteristic specification and the strongly typed patterns. 
+  63: style:Normal text:1)	Using the characteristic specification pattern. When the characteristic specification pattern is used it is assumed that a service specification with the corresponding characteristic specifications exist.
+  64: TABLE 
+  65: style:Normal text:2) Using the Strongly typed pattern. When the strongly typed pattern is used it is assumed that a corresponding YAML or JSON schema is defined for the Service.
+  66: TABLE 
+    67: style:Heading 2 text:Lifecycle of Service
+    68: style:Normal text:Here is the state machine diagram for a Service.
+  70: style:Heading 1 text:Support of polymorphism and extension patterns
+  71: style:Normal text:Support of polymorphic collections and types and schema based extension is provided by means of a list of generic meta-attributes that we describe below. Polymorphism in collections occurs when entities inherit from base entities, for instance a TypeAService or TypeBService inheriting properties from the base Service entity.
+  72: style:Normal text:Generic support of polymorphism and pattern extensions is described in the TMF API Guidelines v3.0 Part 2 document.
+  73: style:Normal text:The @type attribute provides a way to represent the actual class type of an entity. For example, within a list of Service instances some may be instances of TypeAService where other could be instances of TypeBService. The @type gives this information. All resources and sub-resources of this API have a @type attributes that can be provided when this is useful.
+  74: style:Normal text:The @referredType can be used within reference entities (like for instance a RelatedParty object) to explicitly denote the actual entity type of the referred class. Notice that in reference entities the @type, when used, denotes the class type of the reference itself, such as RelatedParty, and not the class type of the referred object. However, since reference classes are rarely sub-classed, @type is generally not useful in reference objects.
+  75: style:Normal text:The @schemaLocation property can be used in resources to allow specifying user-defined properties of an Entity or to specify the expected characteristics of an entity.
+  76: style:Normal text:The @baseType attribute gives a way to provide explicitly the base of class of a given resource that has been extended.
+  77: style:Normal text:
+
+  78: style:Heading 1 text:RESOURCE MODEL
+    79: style:Heading 2 text:Managed Entity and Task Resource Models
+      80: style:Heading 3 text:FIRST resource
+    82: style:Heading 2 text:Notification Resource Models
+      84: style:Heading 3 text:First Notification
+  87: style:Heading 1 text: API OPERATIONS
+  88: style:Normal text:Remember the following Uniform Contract:
+  89: TABLE 
+  91: style:Normal text:Filtering and attribute selection rules are described in the TMF REST Design Guidelines Part 1 document.
+  92: style:Normal text:Notifications are also described in a subsequent section.
+    94: style:Heading 2 text:VERB  url
+  96: style:Heading 1 text:API NOTIFICATIONS
+  97: style:Normal text:For every single of operation on the entities use the following templates and provide sample REST notification POST calls.
+  98: style:Normal text:It is assumed that the Pub/Sub uses the Register and UnRegister mechanisms described in the REST Guidelines part 1. Refer to the guidelines for more details.
+    99: style:Heading 2 text:Register listener
+    100: style:Normal text:  POST /hub
+    101: style:Normal text:Description
+    102: style:Normal text:Sets the communication endpoint address the service instance must use to deliver information about its health state, execution state, failures and metrics. Subsequent POST calls will be rejected by the service if it does not support multiple listeners. In this case DELETE /api/hub/{id} must be called before an endpoint can be created again.
+    103: style:Normal text:Behavior
+    104: style:Normal text:Returns HTTP/1.1 status code 204 if the request was successful.
+    105: style:Normal text:Returns HTTP/1.1 status code 409 if request is not successful.
+    106: style:Normal text:Usage Samples
+    107: style:Normal text:Here's an example of a request for registering a listener.
+    109: TABLE 
+    111: style:Normal text:
+
+    113: style:Heading 2 text:Unregister listener
+    114: style:Normal text:  DELETE /hub/{id}
+    115: style:Normal text:Description
+    116: style:Normal text:Clears the communication endpoint address that was set by creating the Hub.
+    117: style:Normal text:Behavior
+    118: style:Normal text:Returns HTTP/1.1 status code 204 if the request was successful.
+    119: style:Normal text:Returns HTTP/1.1 status code 404 if the resource is not found.
+    120: style:Normal text:Usage Samples
+    121: style:Normal text:Here's an example of a request for un-registering a listener.
+    122: TABLE 
+    124: style:Heading 2 text:Publish Event to listener
+    125: style:Normal text:  POST /client/listener
+    126: style:Normal text:Description
+    127: style:Normal text:Clears the communication endpoint address that was set by creating the Hub.
+    128: style:Normal text:Provides to a registered listener the description of the event that was raised. The /client/listener url is the callback url passed when registering the listener.
+    129: style:Normal text:Behavior
+    130: style:Normal text:Returns HTTP/1.1 status code 201 if the service is able to set the configuration. 
+    131: style:Normal text:Usage Samples
+    132: style:Normal text:Here's an example of a notification received by the listener. In this example "EVENT TYPE" should be replaced by one of the notification types supported by this API (see Notification resources Models section) and EVENT BODY refers to the data structure of the given notification type.
+    133: TABLE 
+    135: style:Normal text:For detailed examples on the general TM Forum notification mechanism, see the TMF REST Design Guidelines Part 1 document.
+  140: style:Heading 1 text:Acknowledgements
+    142: style:Heading 2 text:Version History
+    144: TABLE 
+    146: style:Heading 2 text:Release History
+    147: TABLE 
+    149: style:Heading 2 text:Contributors to Document
+    151: TABLE 
+
+
+------- TABLES ------ 
+
+
+table:17 ***
+
+    cell:0,0: ***
+      0: text:Latest Update: TM Forum Release 18.5.0
+    cell:0,1: ***
+      0: text:Member Evaluation
+    cell:1,0: ***
+      0: text:Version 4.0.0
+    cell:1,1: ***
+      0: text:IPR Mode: RAND
+
+table:64 ***
+
+    cell:0,0: ***
+      0: text:     "id" : "id1234567890",
+      1: text:     "href" : "http//..",
+      2: text:	"state" : "active",
+      3: text:	"serviceSpecification":{
+      4: text:          "id":"conferenceBridgeEquipment",
+      5: text:          "href":"http: //serverlocation:port/catalogManagement/serviceSpecification /conferenceBridgeEquipment"
+      6: text:     },
+      7: text:     "characteristic":[
+      8: text:   {
+      9: text:          "name":"numberOfVc500Units",
+      10: text:           "valueType": "Integer",
+      11: text:          "value":"1"
+      12: text:        },
+      13: text:        {
+      14: text:          "name":"numberOfVc100Units",
+      15: text:           "valueType": "Integer",
+      16: text:          "value":"2"
+      17: text:        },
+      18: text:        {
+      19: text:          "name":"routerType",
+      20: text:           "valueType": "String",
+      21: text:          "value":"CiscoASR1000"
+      22: text:        },
+      23: text:        {
+      24: text:          "name":"powerSupply",
+      25: text:           "valueType": "String",
+      26: text:          "value":"UK"
+      27: text:        }
+      28: text:     ]}
+      29: text: }
+
+table:66 ***
+
+    cell:0,0: ***
+      0: text:{         
+      1: text:   "id" : "id1234567890",
+      2: text:   "href" : "http//..",
+      3: text:   "state" : "active",
+      4: text:   "@type" : "conferenceBridgeEquipment",
+      5: text:   "@schemaLocation" : "http://../conferenceBridgeEquipment.json",
+      6: text:
+      7: text:	"serviceSpecification":{
+      8: text:          "id":"conferenceBridgeEquipment",
+      9: text:          "href":"http: //serverlocation:port/catalogManagement/serviceSpecification /conferenceBridgeEquipment"
+      10: text:     },
+      11: text:     "numberOfVc500Units": "1",
+      12: text:     "numberOfVc100Units": "2",
+      13: text:     "routerType": "CiscoASR1000",
+      14: text:     "powerSupply": "UK"
+      15: text: }
+      16: text:}
+
+table:89 ***
+
+    cell:0,0: ***
+      0: text:Operation on Entities
+    cell:0,1: ***
+      0: text:Uniform API Operation
+    cell:0,2: ***
+      0: text:Description
+    cell:1,0: ***
+      0: text:Query Entities
+    cell:1,1: ***
+      0: text:GET Resource
+    cell:1,2: ***
+      0: text:GET must be used to retrieve a representation of a resource.
+      1: text:
+    cell:2,0: ***
+      0: text:Create Entity
+    cell:2,1: ***
+      0: text:POST Resource
+    cell:2,2: ***
+      0: text:POST must be used to create a new resource
+    cell:3,0: ***
+      0: text:Partial Update of an Entity
+    cell:3,1: ***
+      0: text:PATCH Resource
+    cell:3,2: ***
+      0: text:PATCH must be used to partially update a resource
+    cell:4,0: ***
+      0: text:Complete Update of an Entity
+    cell:4,1: ***
+      0: text:PUT Resource
+    cell:4,2: ***
+      0: text:PUT must be used to completely update a resource identified by its resource URI 
+    cell:5,0: ***
+      0: text:Remove an Entity
+    cell:5,1: ***
+      0: text:DELETE Resource
+    cell:5,2: ***
+      0: text:DELETE must be used to remove a resource
+    cell:6,0: ***
+      0: text:Execute an Action on an Entity 
+    cell:6,1: ***
+      0: text:POST on TASK Resource
+    cell:6,2: ***
+      0: text:POST must be used to execute Task Resources
+    cell:7,0: ***
+      0: text:Other Request Methods
+    cell:7,1: ***
+      0: text:POST on TASK Resource
+    cell:7,2: ***
+      0: text:GET and POST must not be used to tunnel other request methods.
+
+table:109 ***
+
+    cell:0,0: ***
+      0: text:
+Request
+
+    cell:1,0: ***
+      0: text:POST /api/hub
+      1: text:Accept: application/json
+      2: text:
+      3: text:{"callback": "http://in.listener.com"}
+
+    cell:2,0: ***
+      0: text:
+Response
+
+    cell:3,0: ***
+      0: text:201
+      1: text:Content-Type: application/json
+      2: text:Location: /api/hub/42
+      3: text:
+      4: text:{"id":"42","callback":"http://in.listener.com","query":null}
+      5: text:
+
+table:122 ***
+
+    cell:0,0: ***
+      0: text:
+Request
+
+    cell:1,0: ***
+      0: text:DELETE /api/hub/42
+      1: text:Accept: application/json
+
+    cell:2,0: ***
+      0: text:
+Response
+
+    cell:3,0: ***
+      0: text:204
+
+table:133 ***
+
+    cell:0,0: ***
+      0: text:
+Request
+
+    cell:1,0: ***
+      0: text:POST /client/listener
+      1: text:Accept: application/json
+      2: text:
+      3: text:{
+      4: text:    "event": { 
+      5: text:                EVENT BODY 
+      6: text:            },
+      7: text:    "eventType": "EVENT_TYPE"
+      8: text:}
+
+    cell:2,0: ***
+      0: text:
+Response
+
+    cell:3,0: ***
+      0: text:201
+
+table:144 ***
+
+    cell:0,0: ***
+      0: text:Release Number
+    cell:0,1: ***
+      0: text:Date 
+    cell:0,2: ***
+      0: text:Release led by:
+    cell:0,3: ***
+      0: text:Description 
+    cell:1,0: ***
+      0: text:Version 1.0.0
+    cell:1,1: ***
+      0: text:12 Nov 2015
+    cell:1,2: ***
+      0: text:Pierre Gauthier
+      1: text:TM Forum
+    cell:1,3: ***
+      0: text:Submitted for Fx15.5
+    cell:2,0: ***
+      0: text:Version 1.0.1
+    cell:2,1: ***
+      0: text:12 Nov 2015
+    cell:2,2: ***
+      0: text:Alicja Kawecki
+      1: text:TM Forum
+    cell:2,3: ***
+      0: text:Updated cover, header; minor formatting/style corrections prior to publishing
+    cell:3,0: ***
+      0: text:Version 1.0.2
+    cell:3,1: ***
+      0: text:02 May 2016
+    cell:3,2: ***
+      0: text:Alicja Kawecki,
+      1: text:TM Forum
+    cell:3,3: ***
+      0: text:Updated cover, footer, Notice to reflect TM Forum Approved status
+    cell:4,0: ***
+      0: text:Version 4.0.0
+    cell:4,1: ***
+      0: text:14 Jan 2019
+    cell:4,2: ***
+      0: text:Jonathan Goldberg
+      1: text:Amdocs
+      2: text:
+    cell:4,3: ***
+      0: text:Schema alignment for NaaS APIs
+
+table:147 ***
+
+    cell:0,0: ***
+      0: text:Release Number
+    cell:0,1: ***
+      0: text:Date 
+    cell:0,2: ***
+      0: text:Release led by:
+    cell:0,3: ***
+      0: text:Description 
+    cell:1,0: ***
+      0: text:15.5.1
+    cell:1,1: ***
+      0: text:02 May 2016
+    cell:1,2: ***
+      0: text:Alicja Kawecki,
+      1: text:TM Forum
+    cell:1,3: ***
+      0: text:Updated to reflect TM Forum Approved Status
+    cell:2,0: ***
+      0: text:18.5.0
+    cell:2,1: ***
+      0: text:14 Jan 2019
+    cell:2,2: ***
+      0: text:Jonathan Goldberg
+      1: text:Amdocs
+      2: text:
+    cell:2,3: ***
+      0: text:Schema alignment for NaaS APIs
+
+table:151 ***
+
+    cell:0,0: ***
+      0: text:Andrew Forth
+    cell:0,1: ***
+      0: text:Amdocs
+    cell:1,0: ***
+      0: text:August-Wilhelm Jagau
+    cell:1,1: ***
+      0: text:Ericsson
+    cell:2,0: ***
+      0: text:Pierre Gauthier
+    cell:2,1: ***
+      0: text:TM Forum
+    cell:3,0: ***
+      0: text:Jonathan Goldberg
+    cell:3,1: ***
+      0: text:Amdocs

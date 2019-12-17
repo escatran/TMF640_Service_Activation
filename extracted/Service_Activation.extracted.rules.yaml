@@ -1,0 +1,21 @@
+## API rule definitions
+
+api 'API Activation and Configuration':
+  doc: ""
+  hostUrl: "http://env-0693795.jelastic.servint.net"
+  basePath: "/DSEntityProvisioning/api/ActivationAndConfiguration/v2"
+  version: "1.0"
+  flavors: ANY
+  resources:
+    - Service
+    - Monitor
+    - Resource
+  ## Service
+  rules Service:
+    operations: GET,POST,PATCH,DELETE
+  ## Monitor
+  rules Monitor:
+    operations: GET,HEAD
+  ## Resource
+  rules Resource:
+    operations: GET,POST,PATCH,DELETE

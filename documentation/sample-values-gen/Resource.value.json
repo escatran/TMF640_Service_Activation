@@ -1,0 +1,22 @@
+{
+    "adminState": "a string ...", 
+    "characteristic": [
+        {}
+    ], 
+    "description": "This  resource ...", 
+    "href": "https:/host:port/tmf-api/resource/v1/resource/6546", 
+    "id": 72, 
+    "name": "a string ...", 
+    "operationalState": "a string ...", 
+    "relatedParty": [
+        {}
+    ], 
+    "resourceRelationship": [
+        {}
+    ], 
+    "resourceSpecification": {}, 
+    "state": "a string ...", 
+    "type": "a string ...", 
+    "usageState": "a string ...", 
+    "version": "a string ..."
+}
