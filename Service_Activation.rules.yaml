@@ -13,6 +13,16 @@ api 'API Service Activation and Configuration':
   rules Service:
     operations: GET,POST,PATCH,DELETE
     patchable: ALL EXCEPT id, href
+    mandatory in post: state, serviceSpecification.id
+    sub-mandatory in patch/post:
+       relatedParty: id, @referredType
+       serviceRelationship: relationshipType, id
+       note: date, author, text
+       place: role, @referredType
+       characteristic: name, value
+       supportingResource: id
+       supportingService: id
+       serviceOrderItem: orderItemId, serviceOrderId
     notifications:
      - create
      - attributeValueChange
